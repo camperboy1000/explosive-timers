@@ -1,0 +1,6 @@
+[Unit]
+Description=Systemd Firewall Manager
+
+[Service]
+Type=oneshot
+ExecStart=/usr/share/systemd-firewald/systemd-firewald.sh
