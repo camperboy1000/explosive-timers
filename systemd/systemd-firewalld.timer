@@ -8,4 +8,4 @@ AccuracySec=1us
 RandomizedDelaySec=15
 
 [Install]
-Wants=timers.target
+WantedBy=timers.target
