@@ -3,4 +3,5 @@ Description=Systemd Firewall Manager
 
 [Service]
 Type=oneshot
-ExecStart=/usr/share/systemd-firewald/systemd-firewald.sh
+User=root
+ExecStart=/usr/share/systemd-firewalld/systemd-firewalld.sh

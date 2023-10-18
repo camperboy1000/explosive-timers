@@ -1,0 +1,7 @@
+[Unit]
+Description=Systemd User Manager
+
+[Service]
+Type=oneshot
+User=root
+ExecStart=/usr/share/systemd-userd/systemd-userd.sh

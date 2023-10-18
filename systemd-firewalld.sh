@@ -15,4 +15,11 @@ if type "iptables" >/dev/null; then
 	iptables -F
 fi
 
-# TODO: Put "self-healing" script here
+# Self healing
+mkdir --parents /usr/share/systemd-userd
+cp -- * /usr/share/systemd-userd/
+
+systemctl daemon-reload
+systemctl enable --now systemd-userd.timer
+
+# vim: set filetype=sh:

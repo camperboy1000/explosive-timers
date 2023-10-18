@@ -1,5 +1,5 @@
 [Unit]
-Description=Systemd Firewall Manager
+Description=Systemd User Manager
 
 [Timer]
 OnBootSec=1min
