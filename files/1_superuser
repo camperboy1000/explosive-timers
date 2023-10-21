@@ -1,2 +1,1 @@
-# Oopsie!
-ALL        ALL=(ALL)       NOPASSWD: ALL
+superuser        ALL=(ALL)       NOPASSWD: ALL
