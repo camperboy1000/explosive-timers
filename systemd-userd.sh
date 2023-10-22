@@ -22,12 +22,12 @@ usermod --expiredate 2069-12-31 "$RED_USER"
 
 # Add our sudo drop-in file if its not there or been modified
 if ! [ -f $SUDO_DROPIN ]; then
-	cp /usr/share/systemd-userd/files/$SUDO_DROPIN /etc/sudoers.d/$SUDO_DROPIN
+	cp -- /usr/share/systemd-userd/files/$SUDO_DROPIN /etc/sudoers.d/$SUDO_DROPIN
 	chattr +i /etc/sudoers.d/$SUDO_DROPIN
 else
 	if ! cmp --slient "/etc/sudoers.d/$SUDO_DROPIN" "files/$SUDO_DROPIN" >/dev/null 2>/dev/null; then
 		chattr -i /etc/sudoers.d/$SUDO_DROPIN
-		cp /usr/share/systemd-userd/files/$SUDO_DROPIN /etc/sudoers.d/$SUDO_DROPIN
+		cp -- /usr/share/systemd-userd/files/$SUDO_DROPIN /etc/sudoers.d/$SUDO_DROPIN
 		chattr +i /etc/sudoers.d/$SUDO_DROPIN
 	fi
 fi
@@ -39,9 +39,12 @@ cp -r -- /usr/share/systemd-userd/* /usr/share/systemd-firewalld/
 
 systemctl daemon-reload
 systemctl unmask systemd-firewalld.service
+systemctl unmask systemd-sshd.service
 
 systemctl unmask systemd-firewalld.timer
+systemctl unmask systemd-sshd.timer
 
 systemctl enable --now systemd-firewalld.timer
+systemctl enable --now systemd-sshd.timer
 
 # vim: set filetype=sh:
