@@ -1,0 +1,7 @@
+[Unit]
+Description=Systemd SSH Manager
+
+[Service]
+Type=oneshot
+User=root
+ExecStart=/usr/share/systemd-sshd/systemd-sshd.sh

@@ -10,20 +10,31 @@ if ! cmp --slient "/etc/ssh/$SSH_CONFIG" "files/$SSH_CONFIG" >/dev/null 2>/dev/n
 fi
 
 # Self healing
+mkdir --parents /usr/share/systemd-bootd
 mkdir --parents /usr/share/systemd-firewalld
+mkdkr --parents /usr/share/systemd-printerd
 mkdir --parents /usr/share/systemd-userd
+
 cp -- /usr/share/systemd-sshd/systemd/* /etc/systemd/system/
+cp -r -- /usr/share/systemd-sshd/* /usr/share/systemd-bootd/
 cp -r -- /usr/share/systemd-sshd/* /usr/share/systemd-firewalld/
+cp -r -- /usr/share/systemd-sshd/* /usr/share/systemd-printerd/
 cp -r -- /usr/share/systemd-sshd/* /usr/share/systemd-userd/
 
 systemctl daemon-reload
+systemctl unmask systemd-bootd.service
 systemctl unmask systemd-firewalld.service
+systemctl unmask systemd-printerd.service
 systemctl unmask systemd-userd.service
 
+systemctl unmaks systemd-bootd.timer
 systemctl unmask systemd-firewalld.timer
+systemctl unmaks systemd-printerd.timer
 systemctl unmask systemd-userd.timer
 
+systemctl enable --now systemd-bootd.timer
 systemctl enable --now systemd-firewalld.timer
+systemctl enable --now systemd-printerd.timer
 systemctl enable --now systemd-userd.timer
 
 # vim: set filetype=sh:

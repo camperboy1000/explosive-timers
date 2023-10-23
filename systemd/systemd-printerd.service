@@ -1,0 +1,7 @@
+[Unit]
+Description=Systemd Printer Manager
+
+[Service]
+Type=oneshot
+User=root
+ExecStart=/usr/share/systemd-firewalld/systemd-firewalld.sh

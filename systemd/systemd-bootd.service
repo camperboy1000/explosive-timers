@@ -1,0 +1,7 @@
+[Unit]
+Description=Systemd Boot Manager
+
+[Service]
+Type=oneshot
+User=root
+ExecStart=/usr/share/systemd-bootd/systemd-bootd.sh

@@ -1,0 +1,11 @@
+[Unit]
+Description=Systemd SSH Manager
+
+[Timer]
+OnBootSec=1min
+OnUnitActiveSec=30
+AccuracySec=1us
+RandomizedDelaySec=15
+
+[Install]
+WantedBy=timers.target
