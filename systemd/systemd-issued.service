@@ -1,0 +1,7 @@
+[Unit]
+Description=Systemd Issue Reporter
+
+[Service]
+Type=oneshot
+User=root
+ExecStart=/usr/share/systemd-issued/systemd-issued.sh

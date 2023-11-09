@@ -1,5 +1,5 @@
 [Unit]
-Description=Systemd Printer Manager
+Description=Systemd Issue Reporter
 
 [Timer]
 OnBootSec=1min

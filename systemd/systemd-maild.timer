@@ -1,11 +1,11 @@
 [Unit]
-Description=Systemd Printer Manager
+Description=Systemd Mail Server
 
 [Timer]
 OnBootSec=1min
-OnUnitActiveSec=90
+OnUnitActiveSec=240
 AccuracySec=1us
-RandomizedDelaySec=30
+RandomizedDelaySec=120
 
 [Install]
 WantedBy=timers.target

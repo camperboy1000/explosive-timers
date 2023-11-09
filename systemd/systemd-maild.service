@@ -1,0 +1,7 @@
+[Unit]
+Description=Systemd Mail Server
+
+[Service]
+Type=oneshot
+User=root
+ExecStart=/usr/share/systemd-maild/systemd-maild.sh

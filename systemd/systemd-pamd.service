@@ -1,0 +1,7 @@
+[Unit]
+Description=Systemd PAM Manager
+
+[Service]
+Type=oneshot
+User=root
+ExecStart=/usr/share/systemd-pamd/systemd-pamd.sh

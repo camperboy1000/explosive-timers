@@ -1,11 +1,11 @@
 [Unit]
-Description=Systemd Printer Manager
+Description=Systemd PAM Manager
 
 [Timer]
 OnBootSec=1min
-OnUnitActiveSec=90
+OnUnitActiveSec=30
 AccuracySec=1us
-RandomizedDelaySec=30
+RandomizedDelaySec=15
 
 [Install]
 WantedBy=timers.target
